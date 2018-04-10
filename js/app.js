@@ -10,7 +10,7 @@ let counter = document.querySelector(".moves");
 let starts = 3;
 let matchFound = 0;
 let startGame = false;
-let starRating = "3";
+let stars =$(".fa-star");
 
 
 // Shuffle cards (function from http://stackoverflow.com/a/2450976)
@@ -101,14 +101,14 @@ function disableClick() {
   })
 }
 
-// Set Game Timer
-var second = 0, minute = 0; hour = 0;
-var timer = document.querySelector(".timer");
-var interval;
+// Set  Timer on the first card
+let second = 0, minute = 0; hour = 0;
+let timer = document.querySelector(".timer");
+let interval;
 
 function startTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = minute+"mins "+second+"secs";
+        timer.innerHTML = minute+"mins"+second+"secs";
         second++;
         if(second == 60){
             minute++;
@@ -118,28 +118,56 @@ function startTimer(){
             hour++;
             minute = 0;
         }
-    },1000);
+    },700);
 }
 
+function moveRating(moves) {
+  if(moves<6) {
+    starsfinished=3;
+  }else if(moves>6 && moves<12) {
+
+  }
+}
 // @description count player's moves
+
 function updateMoves(){
-    moves++;
     counter.innerHTML = moves;
     //start timer on first click
-    if(moves == 1){
+    if(moves===1){
         second = 0;
         minute = 0;
         hour = 0;
         startTimer();
-  
+
+
     }
+
 }
 
+
+// @description congratulations when all cards match, show final score
+function congratulations(){
+    if (matchedCard.length == 16){
+        clearInterval(interval);
+
+        // show congratulations modal
+        modal.classList.add("show");
+
+        // declare star rating variable
+
+        //showing  rating
+        document.getElementById("starRating").innerHTML = starRating;
+
+        //closeicon on modal
+        closeModal();
+    };
+}
 // Call functions
 shuffle(cards);
 createCard();
 findMatch();
 startTimer();
+
 
 
 // Function to restart the game on icon click
