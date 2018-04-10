@@ -4,12 +4,14 @@ let cards = ["diamond", "diamond", "paper-plane-o", "paper-plane-o", "anchor", "
 
 // Create array to hold opened cards
 let openCard = [];
+//Decalaring move variables
 let moves = 0;
+let counter = document.querySelector(".moves");
 let starts = 3;
 let matchFound = 0;
 let startGame = false;
 let starRating = "3";
-let timer;
+
 
 // Shuffle cards (function from http://stackoverflow.com/a/2450976)
 function shuffle(array) {
@@ -99,13 +101,46 @@ function disableClick() {
   })
 }
 
+// Set Game Timer
+var second = 0, minute = 0; hour = 0;
+var timer = document.querySelector(".timer");
+var interval;
 
+function startTimer(){
+    interval = setInterval(function(){
+        timer.innerHTML = minute+"mins "+second+"secs";
+        second++;
+        if(second == 60){
+            minute++;
+            second=0;
+        }
+        if(minute == 60){
+            hour++;
+            minute = 0;
+        }
+    },1000);
+}
+
+// @description count player's moves
+function updateMoves(){
+    moves++;
+    counter.innerHTML = moves;
+    //start timer on first click
+    if(moves == 1){
+        second = 0;
+        minute = 0;
+        hour = 0;
+        startTimer();
+  
+    }
+}
 
 // Call functions
 shuffle(cards);
 createCard();
 findMatch();
 startTimer();
+
 
 // Function to restart the game on icon click
 function restartGame() {
