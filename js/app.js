@@ -1,16 +1,17 @@
-/*
- * Create a list that holds all of your cards
- */
 
+// Declare card symbols
+let cards = ["diamond", "diamond", "paper-plane-o", "paper-plane-o", "anchor", "anchor", "bolt", "bolt", "cube", "cube", "leaf", "leaf", "bicycle", "bicycle", "bomb", "bomb"];
 
-/*
- * Display the cards on the page
- *   - shuffle the list of cards using the provided "shuffle" method below
- *   - loop through each card and create its HTML
- *   - add each card's HTML to the page
- */
+// Create array to hold opened cards
+let openCard = [];
+let moves = 0;
+let starts = 3;
+let matchFound = 0;
+let startGame = false;
+let starRating = "3";
+let timer;
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+// Shuffle cards (function from http://stackoverflow.com/a/2450976)
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -21,9 +22,102 @@ function shuffle(array) {
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
     }
-
     return array;
 }
+
+// Create each card's HTMl
+function createCard() {
+  let cardList = shuffle(cards);
+  cardList.forEach(function(card) {
+    $(".deck").append('<li><i class="card fa fa-' + card + '"></i></li>');
+  })
+}
+
+// Logic to find matching cards
+
+function findMatch() {
+  // Show cards on click
+  $(".card").on("click", function() {
+    if ($(this).hasClass("open show")) { return; }
+    $(this).toggleClass("flipInY open show");
+    openCard.push($(this));
+    startGame = true;
+   // Check if classlist matches call matsched function
+    if (openCard.length === 2) {
+      if (openCard[0][0].classList[2] === openCard[1][0].classList[2]) {
+      matched();
+      }
+      //else call unmatched function
+      else {
+    unmatched();
+      }
+    }
+  updateMoves();
+  })
+ }
+//if the cards do match, lock the cards in the open position
+function matched() {
+  openCard[0][0].classList.add("bounceIn", "match");
+  openCard[1][0].classList.add("bounceIn", "match");
+  $(openCard[0]).off('click');
+  $(openCard[1]).off('click');
+  matchFound += 1;
+  moves++;
+  removeOpenCards();
+  findWinner();
+}
+
+// if the cards do not match, remove the cards from the list and hide the card's symbol
+function unmatched() {
+  // If classes don't match, add "unmatched" class
+  openCard[0][0].classList.add("shake", "umatched");
+  openCard[1][0].classList.add("shake", "unmatched");
+  // Set timeout to remove "show" and "open" class
+  setTimeout(removeClasses, 700);
+  // Reset openCard.length to 0
+  setTimeout(removeOpenCards, 700);
+  moves++;
+}
+
+
+
+// Reset openCard.length to 0
+function removeOpenCards() {
+  openCard = [];
+}
+
+// Remove all classes except "match"
+function removeClasses() {
+  $(".card").removeClass("show open flipInY bounceIn shake unmatched");
+  removeOpenCards();
+}
+
+// Disable clicks
+function disableClick() {
+ openCard.forEach(function (card) {
+   card.off("click");
+  })
+}
+
+
+
+// Call functions
+shuffle(cards);
+createCard();
+findMatch();
+startTimer();
+
+// Function to restart the game on icon click
+function restartGame() {
+  $("#restart").on("click", function() {
+      location.reload()
+  });
+  }
+
+restartGame();
+
+
+
 
 
 /*
