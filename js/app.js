@@ -50,14 +50,18 @@ function createCard() {
     $(".deck").append('<li><i class="card fa fa-' + card + '"></i></li>');
   })
 }
-
+function SettingTimer() {
+  if (moves==0) {
+  timer.innerHTML = "0 mins 0 secs ";
+}
+}
 // Logic to find matching cards
 
 function findMatch() {
   // Show cards on click
   $(".card").on("click", function() {
     if ($(this).hasClass("open show")) { return; }
-    $(this).toggleClass("flipInY open show");
+    $(this).toggleClass("open show");
     openCard.push($(this));
     startGame = true;
    // Check if classlist matches call matsched function
@@ -75,8 +79,8 @@ function findMatch() {
  }
 //if the cards do match, lock the cards in the open position
 function matched() {
-  openCard[0][0].classList.add("bounceIn", "match");
-  openCard[1][0].classList.add("bounceIn", "match");
+  openCard[0][0].classList.add("match");
+  openCard[1][0].classList.add("match");
   $(openCard[0]).off('click');
   $(openCard[1]).off('click');
   matchFound += 1;
@@ -88,15 +92,17 @@ function matched() {
 // if the cards do not match, remove the cards from the list and hide the card's symbol
 function unmatched() {
   // If classes don't match, add "unmatched" class
-  openCard[0][0].classList.add("shake", "umatched");
-  openCard[1][0].classList.add("shake", "unmatched");
-  // Set timeout to remove "show" and "open" class
+  openCard[0][0].classList.add("unmatched");
+  openCard[1][0].classList.add("unmatched");
+  //disable clicking a third card
+  $(".card").addClass("disabled")
+  // Set timeout to remove classes
   setTimeout(removeClasses, 700);
   // Reset openCard.length to 0
   setTimeout(removeOpenCards, 700);
   moves++;
-}
 
+}
 
 
 // Reset openCard.length to 0
@@ -106,7 +112,7 @@ function removeOpenCards() {
 
 // Remove all classes except "match"
 function removeClasses() {
-  $(".card").removeClass("show open flipInY bounceIn shake unmatched");
+  $(".card").removeClass("show open unmatched disabled");
   removeOpenCards();
 }
 
@@ -117,24 +123,21 @@ function disableClick() {
   })
 }
 
-// Set  Timer on the first card
-let second = 0, minute = 0; hour = 0;
+// Set  Timer
+let second = 0, minute = 0;
 let timer = document.querySelector(".timer");
 let interval;
 
+
 function startTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = minute+"mins"+second+"secs";
+        timer.innerHTML = minute+"mins "+second+" secs";
         second++;
         if(second == 60){
             minute++;
             second=0;
         }
-        if(minute == 60){
-            hour++;
-            minute = 0;
-        }
-    },700);
+    },1000);
 }
 // @description count player's moves
 
@@ -160,7 +163,7 @@ function updateMoves(){
 
 // congratulations when all cards match, show final score
   function findWinner(){
-    if (matchFound ===1) {
+    if (matchFound ===2) {
     gameEnd.addClass('show');
     finalTime = timer.innerHTML;
       document.getElementById("totalMoves").innerHTML = moves;
@@ -188,7 +191,6 @@ shuffle(cards);
 createCard();
 findMatch();
 startTimer();
-
 
 
 // Function to restart the game on icon click
