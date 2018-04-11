@@ -187,3 +187,7 @@ h1 {
  	border-radius: 5px;
    text-align: center;
  }
+
+ #starRating li {
+ 	display: inline-block;
+ }

@@ -12,8 +12,8 @@ let startGame = false;
 //Declaring star variable
 let stars =$(".fa-star");
 
- // close icon in modal
- let closeicon = document.querySelector(".close");
+var starRating = document.querySelector(".stars").innerHTML;
+
 
  // declare modal
 
@@ -162,32 +162,26 @@ function updateMoves(){
   function findWinner(){
     if (matchFound ===1) {
     gameEnd.addClass('show');
-    const timerResult = timer.text();
-    let winnerMessage = $('.winner-message');
-    let starsIcon = starsList.html();
-    winnerMessage.html(`<p class="winner-title">Congrats!</p><p class="winner-text">You finished in ${timerResult}!<p class="winner-text">You needed ${counter} moves</p><p class="winner-text">For this you get ${star} ${starsIcon}</p>`);
-    clearInterval(interval);
-    closeModal();
+    finalTime = timer.innerHTML;
+      document.getElementById("totalMoves").innerHTML = moves;
+      document.getElementById("starRating").innerHTML = starRating;
+      document.getElementById("totalTime").innerHTML = finalTime;
     playAgain();
+    xButton();
   }
 }
 
-
-  function closeModal(){
-    close.click(function(e){
-      gameEnd.removeClass("show");
-      start();
-    });
-  }
-
   function playAgain(){
-    againButton.click(function(){
-      gameEnd.removeClass('show');
-      restartGame();
-  })
+    $("#play-again").on("click", function() {
+      location.reload()
+    });
 };
 
-
+function xButton(){
+  $(".close").on("click", function() {
+    location.reload()
+  });
+};
 
 // Call functions
 shuffle(cards);

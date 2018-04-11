@@ -7,7 +7,7 @@
     <link rel="stylesheet prefetch" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
     <link rel="stylesheet prefetch" href="https://fonts.googleapis.com/css?family=Coda">
     <link rel="stylesheet" href="css/app.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 </head>
 <body>
 
@@ -43,6 +43,9 @@
          <div class="game-finish">
            <div class="content-1">
              <h2>You found all pairs </h2>
+             <h1> You needed <span id=totalMoves> </span> Moves </h1>
+             <h3> You rating is <span id=starRating> </h3>
+              <h3> You needed <span id=totalTime> </h3>
              <a href="#" class="close">
                <i class="fa fa-times"></i>
              </a>
@@ -51,9 +54,6 @@
            <button id="play-again">Try again :)</button>
          </div>
        </div>
-                      <button id="play-again"onclick="playAgain()">
-                          Play again </a>
-                      </button>
                   </div>
               </div>
 
