@@ -39,18 +39,18 @@
         <ul class="deck">
         </ul>
 
-        <div id="popup1" class="overlay">
-                  <div class="popup">
-                      <h2>Congratulations </h2>
-                      <a class="close" href=# >×</a>
-                      <div class="content-1">
-                          Congratulations you matched all pairs
-                      </div>
-                      <div class="content-2">
-                          <p>You made <span id=finalMove> </span> moves </p>
-                          <p>in <span id=totalTime> </span> </p>
-                          <p>Rating:  <span id=starRating></span></p>
-                      </div>
+        <div id="modal" class="popup">
+         <div class="game-finish">
+           <div class="content-1">
+             <h2>You found all pairs </h2>
+             <a href="#" class="close">
+               <i class="fa fa-times"></i>
+             </a>
+           </div>
+           <div class="winner-message"></div>
+           <button id="play-again">Try again :)</button>
+         </div>
+       </div>
                       <button id="play-again"onclick="playAgain()">
                           Play again </a>
                       </button>

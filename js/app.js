@@ -16,7 +16,17 @@ let stars =$(".fa-star");
  let closeicon = document.querySelector(".close");
 
  // declare modal
- let modal = document.getElementById("popup1")
+
+let modal = $('#modal');
+// define stars list
+let starsList = $('.stars li')
+// close icon for modal
+let close = $(".close");
+//define game end
+let gameEnd = $('.popup');
+//define play playAgain
+let againButton = $('#play-again');
+
 
 
 // Shuffle cards (function from http://stackoverflow.com/a/2450976)
@@ -130,13 +140,6 @@ function startTimer(){
 
 function updateMoves(){
     counter.innerHTML = moves;
-    //start timer on first click
-    if(moves===1){
-        second = 0;
-        minute = 0;
-        hour = 0;
-        startTimer();
-    }
     // Set starRating
      if (moves > 8 && moves < 12){
          for( i= 0; i < 3; i++){
@@ -156,35 +159,35 @@ function updateMoves(){
 
 
 // congratulations when all cards match, show final score
-function congratulations(){
-    if (matchFound === 8){
-        clearInterval(interval);
-        finalTime = timer.innerHTML;
-
-        // show congratulations modal
-        modal.classList.add("show");
-
-        // declare star rating variable
-        var starRating = document.querySelector(".stars").innerHTML;
-
-        //showing move, rating, time on modal
-        document.getElementById("finalMove").innerHTML = moves;
-        document.getElementById("starRating").innerHTML = starRating;
-        document.getElementById("totalTime").innerHTML = finalTime;
-
-        //closeicon on modal
-        closeModal();
-    };
+  function findWinner(){
+    if (matchFound ===1) {
+    gameEnd.addClass('show');
+    const timerResult = timer.text();
+    let winnerMessage = $('.winner-message');
+    let starsIcon = starsList.html();
+    winnerMessage.html(`<p class="winner-title">Congrats!</p><p class="winner-text">You finished in ${timerResult}!<p class="winner-text">You needed ${counter} moves</p><p class="winner-text">For this you get ${star} ${starsIcon}</p>`);
+    clearInterval(interval);
+    closeModal();
+    playAgain();
+  }
 }
 
 
-// @description close icon on modal
-function closeModal(){
-    closeicon.addEventListener("click", function(e){
-        modal.classList.remove("show");
-        startGame();
+  function closeModal(){
+    close.click(function(e){
+      gameEnd.removeClass("show");
+      start();
     });
-}
+  }
+
+  function playAgain(){
+    againButton.click(function(){
+      gameEnd.removeClass('show');
+      restartGame();
+  })
+};
+
+
 
 // Call functions
 shuffle(cards);
