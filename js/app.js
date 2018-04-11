@@ -7,10 +7,16 @@ let openCard = [];
 //Decalaring move variables
 let moves = 0;
 let counter = document.querySelector(".moves");
-let starts = 3;
 let matchFound = 0;
 let startGame = false;
+//Declaring star variable
 let stars =$(".fa-star");
+
+ // close icon in modal
+ let closeicon = document.querySelector(".close");
+
+ // declare modal
+ let modal = document.getElementById("popup1")
 
 
 // Shuffle cards (function from http://stackoverflow.com/a/2450976)
@@ -120,14 +126,6 @@ function startTimer(){
         }
     },700);
 }
-
-function moveRating(moves) {
-  if(moves<6) {
-    starsfinished=3;
-  }else if(moves>6 && moves<12) {
-
-  }
-}
 // @description count player's moves
 
 function updateMoves(){
@@ -138,30 +136,56 @@ function updateMoves(){
         minute = 0;
         hour = 0;
         startTimer();
-
-
     }
+    // Set starRating
+     if (moves > 8 && moves < 12){
+         for( i= 0; i < 3; i++){
+             if(i > 1){
+                 stars[i].style.visibility = "collapse";
+             }
+         }
+     }
+     else if (moves > 13){
+         for( i= 0; i < 3; i++){
+             if(i > 0){
+                 stars[i].style.visibility = "collapse";
+             }
+         }
+     }
+ }
 
-}
 
-
-// @description congratulations when all cards match, show final score
+// congratulations when all cards match, show final score
 function congratulations(){
-    if (matchedCard.length == 16){
+    if (matchFound === 8){
         clearInterval(interval);
+        finalTime = timer.innerHTML;
 
         // show congratulations modal
         modal.classList.add("show");
 
         // declare star rating variable
+        var starRating = document.querySelector(".stars").innerHTML;
 
-        //showing  rating
+        //showing move, rating, time on modal
+        document.getElementById("finalMove").innerHTML = moves;
         document.getElementById("starRating").innerHTML = starRating;
+        document.getElementById("totalTime").innerHTML = finalTime;
 
         //closeicon on modal
         closeModal();
     };
 }
+
+
+// @description close icon on modal
+function closeModal(){
+    closeicon.addEventListener("click", function(e){
+        modal.classList.remove("show");
+        startGame();
+    });
+}
+
 // Call functions
 shuffle(cards);
 createCard();
