@@ -163,7 +163,7 @@ function updateMoves(){
 
 // congratulations when all cards match, show final score
   function findWinner(){
-    if (matchFound ===2) {
+    if (matchFound ===8) {
     gameEnd.addClass('show');
     finalTime = timer.innerHTML;
       document.getElementById("totalMoves").innerHTML = moves;
