@@ -2,19 +2,29 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
+* [Memory Game](#memorygame)
+* [Installation](#installtion)
+* [Usage](#usage)
 * [Contributing](#contributing)
 
-## Instructions
+# Memory Game
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
 
-To get started, open `js/app.js` and start building out the app's functionality
+Concentration, also known as Match Match, Match Up, Memory, Pelmanism, Shinkei-suijaku, Pexeso or simply Pairs, is a card game in which all of the cards are laid face down on a surface and two cards are flipped face up over each turn. The object of the game is to turn over pairs of matching cards. Concentration can be played with any number of players or as solitaire. It is a particularly good game for young children, though adults may find it challenging and stimulating as well.
+Source: https://en.wikipedia.org/wiki/Concentration_(game)
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+# Installation
 
-## Contributing
+Download the repository file from GitHub and unzip it on your computer. The GitHub repository can be found here: https://github.com/Alkisti1/Memory-Game
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+# Usage
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+Memory game uses a number of open source projects to work properly:
+
+* [Font Awesome Free] is free, open source, and GPL friendly. You can use it for commercial projects, open source projects, or really almost whatever you want.
+* [jQuery] is a fast, small, and feature-rich JavaScript library.
+* [CSS3} ascading Style Sheets (CSS) is a style sheet language used for describing the presentation of a document written in a markup language.
+* [Coda Fonts] Google Fonts
+
+# Contributing
+Please see https://github.com/Alkisti1/Memory-Game/blob/master/CONTRIBUTING.md
