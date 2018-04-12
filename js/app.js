@@ -1,6 +1,7 @@
 
 // Declare card symbols
-let cards = ["diamond", "diamond", "paper-plane-o", "paper-plane-o", "anchor", "anchor", "bolt", "bolt", "cube", "cube", "leaf", "leaf", "bicycle", "bicycle", "bomb", "bomb"];
+const duplicatable = ["diamond", "paper-plane-o", "anchor", "bolt", "cube", "leaf", "bicycle", "bomb"];
+const cards = duplicatable.concat(duplicatable);
 
 // Create array to hold opened cards
 let openCard = [];
@@ -131,7 +132,7 @@ let interval;
 
 function startTimer(){
     interval = setInterval(function(){
-        timer.innerHTML = minute+"mins "+second+" secs";
+        timer.innerHTML = minute+" mins "+second+" secs";
         second++;
         if(second == 60){
             minute++;
@@ -143,6 +144,8 @@ function startTimer(){
 
 function updateMoves(){
     counter.innerHTML = moves;
+    //start timer on first click
+    $(timer).one('click',startTimer());
     // Set starRating
      if (moves > 8 && moves < 12){
          for( i= 0; i < 3; i++){
@@ -190,7 +193,6 @@ function xButton(){
 shuffle(cards);
 createCard();
 findMatch();
-startTimer();
 
 
 // Function to restart the game on icon click
