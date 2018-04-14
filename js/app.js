@@ -61,6 +61,10 @@ function SettingTimer() {
 function findMatch() {
   // Show cards on click
   $(".card").on("click", function() {
+    if (startGame != true) {
+      startGame = true;
+      startTimer();
+    }
     if ($(this).hasClass("open show")) { return; }
     $(this).toggleClass("open show");
     openCard.push($(this));
@@ -144,8 +148,6 @@ function startTimer(){
 
 function updateMoves(){
     counter.innerHTML = moves;
-    //start timer on first click
-    $(timer).one('click',startTimer());
     // Set starRating
      if (moves > 8 && moves < 12){
          for( i= 0; i < 3; i++){
@@ -193,6 +195,7 @@ function xButton(){
 shuffle(cards);
 createCard();
 findMatch();
+SettingTimer();
 
 
 // Function to restart the game on icon click
